@@ -4,37 +4,20 @@ function App() {
   const [contact, setContact] = useState({
     fName: "",
     lName: "",
-    email: ""
+    email: "",
   });
 
-  function handleOnChangeInput(e){
-    const {name, value } = e.target;
+  function handleOnChangeInput(e) {
+    const { name, value } = e.target;
 
-    setContact( prevValue => {
-      if (name === "fName"){
-        return {
-          fName:value,
-          lName:prevValue.lName,
-          email:prevValue.email
-        }
-      }
-      else if (name === "lName"){
-        return {
-          fName:prevValue.fName,
-          lName:value,
-          email:prevValue.email
-        }
-      }
-      else if (name === "email"){
-        return {
-          fName:prevValue.fName,
-          lName:prevValue.lName,
-          email:value
-        }
-      }
-    })
+    setContact((prevValue) => {
+      return {
+        // put the whole prevValue fields, eg. fName : val, lName: val, and use array syntax to add the new value .
+        ...prevValue,
+        [name]: value,
+      };
+    });
   }
-  
 
   return (
     <div className="container">
@@ -43,9 +26,24 @@ function App() {
       </h1>
       <p>{contact.email}</p>
       <form>
-        <input name="fName" placeholder="First Name" onChange={handleOnChangeInput} value={contact.fName} />
-        <input name="lName" placeholder="Last Name" onChange={handleOnChangeInput}  value={contact.lName}/>
-        <input name="email" placeholder="Email"  onChange={handleOnChangeInput} value={contact.email}/>
+        <input
+          name="fName"
+          placeholder="First Name"
+          onChange={handleOnChangeInput}
+          value={contact.fName}
+        />
+        <input
+          name="lName"
+          placeholder="Last Name"
+          onChange={handleOnChangeInput}
+          value={contact.lName}
+        />
+        <input
+          name="email"
+          placeholder="Email"
+          onChange={handleOnChangeInput}
+          value={contact.email}
+        />
         <button>Submit</button>
       </form>
     </div>
